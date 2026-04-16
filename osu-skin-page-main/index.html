@@ -33,8 +33,10 @@
         nav a:hover{background:var(--glass);color:var(--accent)}
         .header-actions{display:flex;gap:12px;align-items:center}
         .btn{
-            background:linear-gradient(90deg, rgba(255,255,255,0.02), transparent);
-            border:1px solid rgba(255,255,255,0.04);color:var(--accent);padding:8px 12px;border-radius:10px;font-weight:600;cursor:pointer
+            background: linear-gradient(90deg,var(--accent),var(--accent-2));
+            border:1px solid rgba(255,255,255,0.06);
+            color:#061018;
+            padding:8px 12px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(91,222,255,0.06)
         }
 
         .container{max-width:1200px;margin:22px auto;padding:0 20px;display:grid;grid-template-columns: 280px 1fr;gap:20px}
@@ -62,7 +64,8 @@
             background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
             border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;gap:10px;
         }
-        .thumb{height:110px;border-radius:8px;background:linear-gradient(135deg,#061217,#09121a);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:600}
+        .thumb{height:110px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:600;overflow:hidden}
+        .thumb img{width:100%;height:100%;object-fit:cover;display:block}
         .meta{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--muted)}
         .title{font-weight:700;color:#fff}
         .card .actions{display:flex;gap:8px}
@@ -90,9 +93,6 @@
             <a href="#">Top</a>
             <a href="#">Favoritos</a>
         </nav>
-        <div class="header-actions">
-            <button class="btn" id="publishBtn">Publicar skin</button>
-        </div>
     </header>
 
     <div class="container">
@@ -112,9 +112,8 @@
             <div class="field">
                 <label for="sort">Ordenar</label>
                 <select id="sort">
-                    <option value="new">Más recientes</option>
-                    <option value="popular">Más populares</option>
-
+                    <option value="popular">Más Populares</option>
+                    <option value="downloads">Más Descargados</option>
                 </select>
             </div>
         </aside>
@@ -125,57 +124,65 @@
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:0.8"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     <input id="search" type="search" placeholder="Buscar skins, autores, etiquetas..." aria-label="buscar skins">
                 </div>
-                <div style="display:flex;gap:8px">
-                    <button class="small-btn" id="clearFilters">Limpiar</button>
-                    <div style="color:var(--muted);font-size:13px;padding:8px;border-radius:8px;background:var(--card)">Resultados: <span id="count">0</span></div>
-                </div>
             </div>
 
             <section class="grid" id="grid" aria-live="polite">
                 <!-- Ejemplo de tarjetas; en implementación real se generan desde servidor -->
-                <article class="card" data-title="Neon Pulse" data-mode="standard" data-tags="neon,minimal" data-rating="4.5">
-                    <div class="thumb">Neon Pulse</div>
+                <article class="card" data-mode="standard,Taiko" data-tags="neon,minimal" data-rating="4.5" data-downloads="240000">
+                    <div class="thumb"><img src="imagenes/Don_Omar.jpg" alt="Reggaeton Skin"></div>
                     <div>
-                        <div class="title">Neon Pulse</div>
-                        <div class="meta"><span class="muted">Autor: Aki</span><span>4.5 ★</span></div>
+                        <div class="title">Reggaeton Skin</div>
+                        <div class="meta"><span class="muted">JosecinPro</span><span>4.5 ★</span></div>
                     </div>
                     <div class="actions" style="margin-top:auto;display:flex;justify-content:space-between;align-items:center">
-                        <div style="font-size:13px;color:var(--muted)">Standard · Neon</div>
+                        <div style="font-size:13px;color:var(--muted)">Standard · Taiko<br><span class="downloads" style="font-size:13px;color:var(--muted)">Descargas: 240k</span></div>
                         <div>
                             <button class="small-btn">Descargar</button>
                         </div>
                     </div>
                 </article>
 
-                <article class="card" data-title="Anime Bloom" data-mode="catch" data-tags="anime,dark" data-rating="4.2">
-                    <div class="thumb">Anime Bloom</div>
+                <article class="card" data-mode="catch" data-tags="anime,dark" data-rating="4.22" data-downloads="600">
+                    <div class="thumb"><img src="https://picsum.photos/seed/anime/640/360" alt="Anime Bloom"></div>
                     <div>
                         <div class="title">Anime Bloom</div>
                         <div class="meta"><span class="muted">Autor: Sakura</span><span>4.2 ★</span></div>
                     </div>
                     <div class="actions" style="margin-top:auto;display:flex;justify-content:space-between;align-items:center">
-                        <div style="font-size:13px;color:var(--muted)">Catch · Anime</div>
+                        <div style="font-size:13px;color:var(--muted)">Catch<br><span class="downloads" style="font-size:13px;color:var(--muted)">Descargas: 600</span></div>
                         <div>
                             <button class="small-btn">Descargar</button>
                         </div>
                     </div>
                 </article>
 
-                <article class="card" data-title="Retro Hit" data-mode="taiko" data-tags="retro,minimal" data-rating="3.9">
-                    <div class="thumb">Retro Hit</div>
+                <article class="card" data-title="Retro Hit" data-mode="taiko" data-tags="retro,minimal" data-rating="3.9" data-downloads="800">
+                    <div class="thumb"><img src="https://picsum.photos/seed/retro/640/360" alt="Retro Hit"></div>
                     <div>
                         <div class="title">Retro Hit</div>
                         <div class="meta"><span class="muted">Autor: DJ Old</span><span>3.9 ★</span></div>
                     </div>
                     <div class="actions" style="margin-top:auto;display:flex;justify-content:space-between;align-items:center">
-                        <div style="font-size:13px;color:var(--muted)">Taiko · Retro</div>
+                        <div style="font-size:13px;color:var(--muted)">Taiko<br><span class="downloads" style="font-size:13px;color:var(--muted)">Descargas: 800</span></div>
                         <div>
                             <button class="small-btn">Descargar</button>
                         </div>
                     </div>
                 </article>
 
-                <!-- Más tarjetas... -->
+                <article class="card" data-title="Skin de pro" data-mode="mania,standard" data-tags="retro,minimal" data-rating="4,0" data-downloads="350000">
+                    <div class="thumb"><img src="imagenes/luffy-pe.jpg" alt="Retro Hit"></div>
+                    <div>
+                        <div class="title">Skin de pro</div>
+                        <div class="meta"><span class="muted">Autor: the_p1pe</span><span>4.0 ★</span></div>
+                    </div>
+                    <div class="actions" style="margin-top:auto;display:flex;justify-content:space-between;align-items:center">
+                        <div style="font-size:13px;color:var(--muted)">Mania · Standard<br><span class="downloads" style="font-size:13px;color:var(--muted)">Descargas: 350k</span></div>
+                        <div>
+                            <button class="small-btn">Descargar</button>
+                        </div>
+                    </div>
+                </article>
             </section>
         </main>
     </div>
@@ -183,10 +190,12 @@
     <footer>© 2026 osu! Skins • Diseñado para compartir skins en tonos oscuros</footer>
 
     <script>
-        // Filtrado básico en cliente
+        // Filtrado y ordenado básico en cliente
+        const grid = document.getElementById('grid');
         const cards = Array.from(document.querySelectorAll('.card'));
         const search = document.getElementById('search');
         const mode = document.getElementById('mode');
+        const sortSelect = document.getElementById('sort');
         const rating = document.getElementById('rating');
         const tagButtons = Array.from(document.querySelectorAll('.tag'));
         const clearBtn = document.getElementById('clearFilters');
@@ -194,20 +203,51 @@
 
         let activeTags = new Set();
 
+        function normalizeRating(val){
+            if(val === undefined || val === null) return 0;
+            return parseFloat(String(val).replace(',', '.')) || 0;
+        }
+
+        function normalizeDownloads(val){
+            if(val === undefined || val === null) return 0;
+            return parseInt(String(val).replace(/[^0-9]/g, '')) || 0;
+        }
+
+        // Ordenar tarjetas en el DOM según criterio
+        function sortCardsBy(key){
+            const sorted = cards.slice().sort((a,b)=>{
+                if(key === 'popular'){
+                    const ra = normalizeRating(a.dataset.rating);
+                    const rb = normalizeRating(b.dataset.rating);
+                    return rb - ra; // mayor rating primero
+                }
+                if(key === 'downloads'){
+                    const da = normalizeDownloads(a.dataset.downloads);
+                    const db = normalizeDownloads(b.dataset.downloads);
+                    return db - da; // más descargas primero
+                }
+                return 0;
+            });
+            // Re-append in order
+            sorted.forEach(c => grid.appendChild(c));
+        }
+
         function applyFilters(){
-            const q = search.value.trim().toLowerCase();
-            const m = mode.value;
-            const minRating = parseFloat(rating.value || 0);
+            const q = (search.value || '').trim().toLowerCase();
+            const m = (mode.value || '').toLowerCase();
+            const minRating = rating ? normalizeRating(rating.value || 0) : 0;
 
             let visible = 0;
             cards.forEach(c=>{
-                const title = c.dataset.title.toLowerCase();
+                const titleRaw = c.dataset.title || (c.querySelector('.title') && c.querySelector('.title').textContent) || '';
+                const title = titleRaw.toLowerCase();
                 const tags = c.dataset.tags ? c.dataset.tags.split(',') : [];
-                const cardMode = c.dataset.mode;
-                const cardRating = parseFloat(c.dataset.rating || 0);
+                const cardMode = (c.dataset.mode || '').toLowerCase();
+                const cardRating = normalizeRating(c.dataset.rating || 0);
 
-                const matchesQuery = !q || title.includes(q) || tags.join(' ').includes(q);
-                const matchesMode = !m || cardMode === m;
+                // Buscar por título, etiquetas y también por modo (data-mode)
+                const matchesQuery = !q || title.includes(q) || tags.join(' ').includes(q) || cardMode.includes(q);
+                const matchesMode = !m || cardMode === m || cardMode.split(',').includes(m);
                 const matchesRating = cardRating >= minRating;
                 const matchesTags = activeTags.size === 0 || [...activeTags].every(t => tags.includes(t));
 
@@ -218,33 +258,36 @@
             count.textContent = visible;
         }
 
-        search.addEventListener('input', applyFilters);
-        mode.addEventListener('change', applyFilters);
-        rating.addEventListener('change', applyFilters);
+        // Listeners
+        if(search) search.addEventListener('input', ()=>{ applyFilters(); });
+        if(mode) mode.addEventListener('change', ()=>{ applyFilters(); });
+        if(rating) rating.addEventListener('change', ()=>{ applyFilters(); });
+        if(sortSelect) sortSelect.addEventListener('change', ()=>{ sortCardsBy(sortSelect.value); applyFilters(); });
 
         tagButtons.forEach(btn=>{
             btn.addEventListener('click', ()=>{
                 const t = btn.dataset.tag;
-                if(activeTags.has(t)){ activeTags.delete(t); btn.classList.remove('active') }
-                else { activeTags.add(t); btn.classList.add('active') }
+                if(activeTags.has(t)){ activeTags.delete(t); btn.classList.remove('active'); }
+                else { activeTags.add(t); btn.classList.add('active'); }
                 applyFilters();
             });
         });
 
         clearBtn.addEventListener('click', ()=>{
-            search.value = '';
-            mode.value = '';
-            rating.value = '0';
+            if(search) search.value = '';
+            if(mode) mode.value = '';
+            if(rating) rating.value = '0';
+            if(sortSelect) sortSelect.value = 'popular';
             activeTags.clear();
             tagButtons.forEach(b=>b.classList.remove('active'));
+            // aplicar orden por defecto y filtros
+            if(sortSelect) sortCardsBy(sortSelect.value);
             applyFilters();
         });
 
-        // Inicial
+        // Inicializar: ordenar según selección por defecto y aplicar filtros
+        if(sortSelect) sortCardsBy(sortSelect.value);
         applyFilters();
-
-        // Placeholder: acción del botón publicar
-        document.getElementById('publishBtn').addEventListener('click', ()=>alert('Abrir formulario para publicar skin (implementación pendiente)'));
     </script>
 </body>
 </html>
