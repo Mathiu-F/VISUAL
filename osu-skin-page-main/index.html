@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Publicar skins - osu!</title>
+    <link rel="icon" type="image/x-icon" href="ImagenesIco/xOoomk_9_400x400.ico" />
+    <style>
+:root{
+            --bg:#0b0e12;
+            --panel:#0f1418;
+            --muted:#9aa4b2;
+            --accent:#5ee0ff;
+            --accent-2:#9b7cff;
+            --card:#10151a;
+            --glass: rgba(255,255,255,0.03);
+            --radius:10px;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+        *{box-sizing:border-box}
+        html,body{height:100%;background:linear-gradient(180deg,var(--bg),#050608);color:#eaf2ff;margin:0}
+        header{
+            display:flex;align-items:center;justify-content:space-between;padding:18px 24px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+            border-bottom:1px solid rgba(255,255,255,0.03);
+            position:sticky;top:0;backdrop-filter: blur(6px);z-index:10;
+        }
+        .brand{display:flex;gap:12px;align-items:center}
+        .logo{
+            width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:700;color:#081018;
+        }
+        nav{display:flex;gap:12px;align-items:center}
+        nav a{color:var(--muted);text-decoration:none;font-size:14px;padding:8px;border-radius:8px}
+        nav a:hover{background:var(--glass);color:var(--accent)}
+        .header-actions{display:flex;gap:12px;align-items:center}
+        .btn{
+            background:linear-gradient(90deg, rgba(255,255,255,0.02), transparent);
+            border:1px solid rgba(255,255,255,0.04);color:var(--accent);padding:8px 12px;border-radius:10px;font-weight:600;cursor:pointer
+        }
+
+        .container{max-width:1200px;margin:22px auto;padding:0 20px;display:grid;grid-template-columns: 280px 1fr;gap:20px}
+        aside.filters{
+            background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+            padding:16px;border-radius:var(--radius);border:1px solid rgba(255,255,255,0.03);
+            height:fit-content;
+        }
+        .filters h3{margin:0 0 12px 0;font-size:15px;color:var(--accent)}
+        .field{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+        label{font-size:13px;color:var(--muted)}
+        select,input[type="search"]{background:var(--card);border:1px solid rgba(255,255,255,0.03);padding:10px;border-radius:8px;color:inherit;outline:none}
+        .tags{display:flex;flex-wrap:wrap;gap:8px}
+        .tag{padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.02);cursor:pointer;color:var(--muted);font-size:13px;border:1px solid rgba(255,255,255,0.02)}
+        .tag.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#061018;border:none}
+
+        main{min-height:60vh}
+        .toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:12px}
+        .search{
+            display:flex;align-items:center;gap:8px;background:var(--card);padding:8px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);flex:1;
+        }
+        .search input{flex:1;background:transparent;border:0;color:inherit;padding:6px;outline:none}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+        .card{
+            background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+            border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;gap:10px;
+        }
+        .thumb{height:110px;border-radius:8px;background:linear-gradient(135deg,#061217,#09121a);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:600}
+        .meta{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--muted)}
+        .title{font-weight:700;color:#fff}
+        .card .actions{display:flex;gap:8px}
+        .small-btn{padding:6px 8px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);color:var(--muted);cursor:pointer;font-size:13px}
+
+        footer{padding:18px 24px;text-align:center;color:var(--muted);font-size:13px;margin-top:26px}
+
+        @media (max-width:880px){
+            .container{grid-template-columns:1fr; padding-bottom:40px}
+            aside.filters{order:2}
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="brand">
+            <div class="logo">osu!</div>
+            <div>
+                <div style="font-weight:700">Skins</div>
+                
+            </div>
+        </div>
+        <nav aria-label="navegacion">
+            <a href="#">Inicio</a>
+            <a href="#">Top</a>
+            <a href="#">Favoritos</a>
+        </nav>
+        <div class="header-actions">
+            <button class="btn" id="publishBtn">Publicar skin</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="filters" aria-label="filtros">
+            <h3>Filtros</h3>
+            <div class="field">
+                <label for="mode">Modo</label>
+                <select id="mode">
+                    <option value="">Todos</option>
+                    <option value="standard">Standard</option>
+                    <option value="taiko">Taiko</option>
+                    <option value="catch">Catch</option>
+                    <option value="mania">Mania</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="sort">Ordenar</label>
+                <select id="sort">
+                    <option value="new">Más recientes</option>
+                    <option value="popular">Más populares</option>
+
+                </select>
+            </div>
+        </aside>
+
+        <main>
+            <div class="toolbar">
+                <div class="search" role="search">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:0.8"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <input id="search" type="search" placeholder="Buscar skins, autores, etiquetas..." aria-label="buscar skins">
+                </div>
+                <div style="display:flex;gap:8px">
+                    <button class="small-btn" id="clearFilters">Limpiar</button>
+                    <div style="color:var(--muted);font-size:13px;padding:8px;border-radius:8px;background:var(--card)">Resultados: <span id="count">0</span></div>
+                </div>
+            </div>
+
+            <section class="grid" id="grid" aria-live="polite">
+                <!-- Ejemplo de tarjetas; en implementación real se generan desde servidor -->
+                <article class="card" data-title="Neon Pulse" data-mode="standard" data-tags="neon,minimal" data-rating="4.5">
+                    <div class="thumb">Neon Pulse</div>
+                    <div>
+                        <div class="title">Neon Pulse</div>
+                        <div class="meta"><span class="muted">Autor: Aki</span><span>4.5 ★</span></div>
+                    </div>
+                    <div class="actions" style="margin-top:auto;display:flex;justify-content:space-between;align-items:center">
+                        <div style="font-size:13px;color:var(--muted)">Standard · Neon</div>
+                        <div>
+                            <button class="small-btn">Descargar</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card" data-title="Anime Bloom" data-mode="catch" data-tags="anime,dark" data-rating="4.2">
+                    <div class="thumb">Anime Bloom</div>
+                    <div>
+                        <div class="title">Anime Bloom</div>
+                        <div class="meta"><span class="muted">Autor: Sakura</span><span>4.2 ★</span></div>
+                    </div>
+                    <div class="actions" style="margin-top:auto;display:flex;justify-content:space-between;align-items:center">
+                        <div style="font-size:13px;color:var(--muted)">Catch · Anime</div>
+                        <div>
+                            <button class="small-btn">Descargar</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card" data-title="Retro Hit" data-mode="taiko" data-tags="retro,minimal" data-rating="3.9">
+                    <div class="thumb">Retro Hit</div>
+                    <div>
+                        <div class="title">Retro Hit</div>
+                        <div class="meta"><span class="muted">Autor: DJ Old</span><span>3.9 ★</span></div>
+                    </div>
+                    <div class="actions" style="margin-top:auto;display:flex;justify-content:space-between;align-items:center">
+                        <div style="font-size:13px;color:var(--muted)">Taiko · Retro</div>
+                        <div>
+                            <button class="small-btn">Descargar</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Más tarjetas... -->
+            </section>
+        </main>
+    </div>
+
+    <footer>© 2026 osu! Skins • Diseñado para compartir skins en tonos oscuros</footer>
+
+    <script>
+        // Filtrado básico en cliente
+        const cards = Array.from(document.querySelectorAll('.card'));
+        const search = document.getElementById('search');
+        const mode = document.getElementById('mode');
+        const rating = document.getElementById('rating');
+        const tagButtons = Array.from(document.querySelectorAll('.tag'));
+        const clearBtn = document.getElementById('clearFilters');
+        const count = document.getElementById('count');
+
+        let activeTags = new Set();
+
+        function applyFilters(){
+            const q = search.value.trim().toLowerCase();
+            const m = mode.value;
+            const minRating = parseFloat(rating.value || 0);
+
+            let visible = 0;
+            cards.forEach(c=>{
+                const title = c.dataset.title.toLowerCase();
+                const tags = c.dataset.tags ? c.dataset.tags.split(',') : [];
+                const cardMode = c.dataset.mode;
+                const cardRating = parseFloat(c.dataset.rating || 0);
+
+                const matchesQuery = !q || title.includes(q) || tags.join(' ').includes(q);
+                const matchesMode = !m || cardMode === m;
+                const matchesRating = cardRating >= minRating;
+                const matchesTags = activeTags.size === 0 || [...activeTags].every(t => tags.includes(t));
+
+                const show = matchesQuery && matchesMode && matchesRating && matchesTags;
+                c.style.display = show ? '' : 'none';
+                if(show) visible++;
+            });
+            count.textContent = visible;
+        }
+
+        search.addEventListener('input', applyFilters);
+        mode.addEventListener('change', applyFilters);
+        rating.addEventListener('change', applyFilters);
+
+        tagButtons.forEach(btn=>{
+            btn.addEventListener('click', ()=>{
+                const t = btn.dataset.tag;
+                if(activeTags.has(t)){ activeTags.delete(t); btn.classList.remove('active') }
+                else { activeTags.add(t); btn.classList.add('active') }
+                applyFilters();
+            });
+        });
+
+        clearBtn.addEventListener('click', ()=>{
+            search.value = '';
+            mode.value = '';
+            rating.value = '0';
+            activeTags.clear();
+            tagButtons.forEach(b=>b.classList.remove('active'));
+            applyFilters();
+        });
+
+        // Inicial
+        applyFilters();
+
+        // Placeholder: acción del botón publicar
+        document.getElementById('publishBtn').addEventListener('click', ()=>alert('Abrir formulario para publicar skin (implementación pendiente)'));
+    </script>
+</body>
+</html>
